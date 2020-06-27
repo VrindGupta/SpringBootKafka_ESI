@@ -38,19 +38,19 @@ public class KafkaStreamConsumerForSentences {
 
 	public static void read() {
 		
-		timer.schedule(new readFromTopic(), 100);
+		timer.schedule(new readFromTopic(), 60000);
 
 	}
 
 	static class readFromTopic extends TimerTask {
 		public void run() {
-			ConsumerRecords<String, JsonCustomObject> record = consumer.poll(1000);
+			ConsumerRecords<String, JsonCustomObject> record = consumer.poll(60000);
 			for (ConsumerRecord<String, JsonCustomObject> re : record) {
 				if(re.value().getMessage().length()>0) {
 					session.execute("INSERT INTO kafka (message) VALUES ("+re.value().getMessage()+")");
 				}
 			}
-			timer.schedule(new readFromTopic(), 10000);
+			timer.schedule(new readFromTopic(), 60000);
 		}
 	}
 

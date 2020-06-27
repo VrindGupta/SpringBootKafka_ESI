@@ -29,7 +29,7 @@ public class KafkaStreamConsumer {
 
 	public static void read() {
 		
-		timer.schedule(new readFromTopic(), 10000);
+		timer.schedule(new readFromTopic(), 60000);
 
 	}
 
@@ -42,7 +42,7 @@ public class KafkaStreamConsumer {
 			}
 			JsonCustomObject cust = new JsonCustomObject("waste", sb.toString());
 			KafkaProducerStream.send(cust, "sentences");
-			timer.schedule(new readFromTopic(), 10000);
+			timer.schedule(new readFromTopic(), 60000);
 		}
 	}
 
